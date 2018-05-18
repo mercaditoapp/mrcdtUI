@@ -51,6 +51,8 @@ export class ProductosComponent implements OnInit {
               console.dir(precioMinimoVenta);
             }
           )
+          
+          this.getProductos();
         }
       );
   }
