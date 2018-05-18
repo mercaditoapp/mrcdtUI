@@ -1,0 +1,24 @@
+.list-group-item.active{
+    background-color: lightseagreen;
+    border-color: lightseagreen;
+}
+
+.table-receta{
+    font-size: 12px;
+    overflow: auto;
+    height: 100px;
+}
+
+.buscador-ingredientes{
+    min-height: 250px;
+}
+
+.buscador-ingredientes-table{
+    overflow: auto;
+    max-height: 180px;
+}
+
+.ingredientes-tab{
+    overflow: auto;
+    height: 300px;
+}

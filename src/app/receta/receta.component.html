@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <hr>
+    <div class="row">
+      <div class="col-md-3">
+        <img src="{{receta.imagen}}" alt="{{receta.nombreUrl}}" class="img-thumbnail receta-img">
+      </div>
+      <div class="col-md-9">
+        <h1>{{receta.nombre}}</h1>
+        <hr>
+        <span>{{receta.descripcion}}</span>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Ingredientes</h4>
+        <hr>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item active">
+            <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Todos</a>
+          </li>
+          <li class="nav-item" *ngFor="let procedimiento of receta.procedimientos; let i = index">
+            <a class="nav-link" id="{{procedimiento.nombreTab}}-tab-ingredientes" data-toggle="tab" href="#{{procedimiento.nombreTab}}-ingredientes"
+              role="tab" [attr.aria-controls]="procedimiento.nombreTab" aria-selected="false">{{procedimiento.nombre}}</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade active in" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table" id="table-todos-ingredientes">
+              <thead>
+                <tr>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Unidad</th>
+                  <th scope="col">Producto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ingredienteReceta of receta.ingredientesReceta; let i_ingredienteReceta = index">
+                  <td>{{ingredienteReceta.cantidad}}</td>
+                  <td>{{ingredienteReceta.unidad.abreviatura}}</td>
+                  <td>{{ingredienteReceta.producto.nombre}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tab-pane fade" *ngFor="let procedimiento of receta.procedimientos; let i_procedimiento = index" id="{{procedimiento.nombreTab}}-ingredientes"
+            role="tabpanel" [attr.aria-labelledby]="procedimiento.nombreTab + '-tab-ingredientes'">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Unidad</th>
+                  <th scope="col">Producto</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ingredienteProcedimiento of procedimiento.ingredientesProcedimiento; let i_ingredienteProcedimiento = index">
+                  <td>{{ingredienteProcedimiento.cantidad}}</td>
+                  <td>{{ingredienteProcedimiento.unidad.abreviatura}}</td>
+                  <td>{{ingredienteProcedimiento.producto.nombre}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4>Procedimiento</h4>
+        <hr>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" *ngFor="let procedimiento of receta.procedimientos; let i = index">
+            <a class="nav-link" id="{{procedimiento.nombreTab}}-tab-procedimiento" data-toggle="tab" href="#{{procedimiento.nombreTab}}-procedimiento"
+              role="tab" [attr.aria-controls]="procedimiento.nombreTab" aria-selected="false">{{procedimiento.nombre}}</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">INGREDIENTES DE TODA LA RECETA</div>
+          <div class="tab-pane fade" *ngFor="let procedimiento of receta.procedimientos; let i_procedimiento = index" id="{{procedimiento.nombreTab}}-procedimiento"
+            role="tabpanel" [attr.aria-labelledby]="procedimiento.nombreTab + '-tab-procedimiento'">
+            <ol>
+              <li *ngFor="let paso of procedimiento.pasos; let i_paso = index">{{paso.descripcion}}</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <hr>
+    <h3>Recetas</h3>
+    <hr>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="receta.nombre" placeholder="Nombre">
+          </div>
+          <div class="form-group col-md-6">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="receta.nombreUrl" placeholder="Nombre URL">
+          </div>
+          <div class="form-group col-md-12">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="receta.imagen" placeholder="Imagen">
+          </div>
+          <div class="form-group col-md-12">
+            <textarea class="form-control form-control-sm" rows="5" [(ngModel)]="receta.descripcion" placeholder="Descripcion"></textarea>
+          </div>
+          <div class="form-group col-md-3">
+            <button class="btn btn-success btn-sm" (click)='agregarReceta()'>Agregar Receta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6 col-md-3" *ngFor="let receta of recetas; let i = index">
+        <div class="card">
+          <img class="card-img-top" src="{{ receta.imagen }}" alt="{{ receta.imagen }}">
+          <div class="card-body">
+            <h6 class="card-title">{{ receta.nombre }}</h6>
+            <p class="card-text">{{ receta.descripcion }}</p>
+            <a href="/manager/receta/{{receta.nombreUrl}}" class="btn btn-info" role="button">Editar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
