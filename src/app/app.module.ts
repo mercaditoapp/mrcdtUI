@@ -11,15 +11,18 @@ import { ProductosComponent } from './productos/productos.component';
 import { RecetasComponent } from './recetas/recetas.component';
 import { RecetaComponent } from './receta/receta.component';
 import { ManagerRecetaComponent } from './manager-receta/manager-receta.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 import { ProductosService } from './productos.service';
 import { PrecioMinimoVentaService } from './precio-minimo-venta.service';
+import { PrecioBaseService } from './precio-base.service';
 import { UnidadService } from './unidad.service';
+import { EscalarService } from './escalar.service';
 import { RecetaService } from './receta.service';
 import { ProcedimientoService } from './procedimiento.service';
 import { IngredienteProcedimientoService } from './ingrediente-procedimiento.service';
 import { PasoService } from './paso.service';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -53,10 +56,12 @@ const appRoutes: Routes = [
   providers: [
     ProductosService,
     PrecioMinimoVentaService,
+    PrecioBaseService,
     UnidadService,
     RecetaService,
     ProcedimientoService,
     IngredienteProcedimientoService,
+    EscalarService,
     PasoService,
     { provide: BrowserXhr, useClass: NgProgressBrowserXhr }
   ],

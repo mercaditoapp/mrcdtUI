@@ -6,5 +6,6 @@ export class Escalar {
     public unidad: Unidad;
     
     constructor() { 
+        this.unidad = new Unidad();
     }
 }

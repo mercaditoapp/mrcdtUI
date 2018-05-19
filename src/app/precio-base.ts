@@ -8,5 +8,6 @@ export class PrecioBase {
     public escalar: Escalar;
     
     constructor() { 
+        this.escalar = new Escalar();
     }
 }
