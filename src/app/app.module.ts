@@ -22,6 +22,7 @@ import { RecetaService } from './receta.service';
 import { ProcedimientoService } from './procedimiento.service';
 import { IngredienteProcedimientoService } from './ingrediente-procedimiento.service';
 import { PasoService } from './paso.service';
+import { RecetasClienteComponent } from './recetas-cliente/recetas-cliente.component';
 
 
 const appRoutes: Routes = [
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
   { path: 'productos', component: ProductosComponent },
   { path: 'recetas', component: RecetasComponent },
   { path: 'receta/:nombreUrl', component: RecetaComponent },
-  { path: 'manager/receta/:nombreUrl', component: ManagerRecetaComponent }
+  { path: 'manager/receta/:nombreUrl', component: ManagerRecetaComponent },
+  { path: 'recetas-cliente', component: RecetasClienteComponent }
 
 ];
 
@@ -41,7 +43,8 @@ const appRoutes: Routes = [
     RecetasComponent,
     RecetaComponent,
     ManagerRecetaComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    RecetasClienteComponent
   ],
   imports: [
     FormsModule,
