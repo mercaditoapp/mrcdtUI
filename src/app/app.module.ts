@@ -24,6 +24,7 @@ import { IngredienteProcedimientoService } from './ingrediente-procedimiento.ser
 import { PasoService } from './paso.service';
 import { RecetasClienteComponent } from './recetas-cliente/recetas-cliente.component';
 import { RecetaClienteComponent } from './receta-cliente/receta-cliente.component';
+import { PedidoClienteComponent } from './pedido-cliente/pedido-cliente.component';
 
 
 const appRoutes: Routes = [
@@ -33,8 +34,8 @@ const appRoutes: Routes = [
   { path: 'receta/:nombreUrl', component: RecetaComponent },
   { path: 'manager/receta/:nombreUrl', component: ManagerRecetaComponent },
   { path: 'recetas-cliente', component: RecetasClienteComponent },
-  { path: 'receta-cliente', component: RecetaClienteComponent }
-
+  { path: 'receta-cliente', component: RecetaClienteComponent },
+  { path: 'pedido-cliente', component: PedidoClienteComponent }
 ];
 
 
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     ManagerRecetaComponent,
     LandingPageComponent,
     RecetasClienteComponent,
-    RecetaClienteComponent
+    RecetaClienteComponent,
+    PedidoClienteComponent
   ],
   imports: [
     FormsModule,
