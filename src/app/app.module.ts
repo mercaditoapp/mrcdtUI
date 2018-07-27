@@ -25,6 +25,7 @@ import { PasoService } from './paso.service';
 import { RecetasClienteComponent } from './recetas-cliente/recetas-cliente.component';
 import { RecetaClienteComponent } from './receta-cliente/receta-cliente.component';
 import { PedidoClienteComponent } from './pedido-cliente/pedido-cliente.component';
+import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 
 
 const appRoutes: Routes = [
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
   { path: 'manager/receta/:nombreUrl', component: ManagerRecetaComponent },
   { path: 'recetas-cliente', component: RecetasClienteComponent },
   { path: 'receta-cliente', component: RecetaClienteComponent },
-  { path: 'pedido-cliente', component: PedidoClienteComponent }
+  { path: 'pedido-cliente', component: PedidoClienteComponent },
+  { path: 'registro-usuario', component: RegistroUsuarioComponent }
 ];
 
 
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     LandingPageComponent,
     RecetasClienteComponent,
     RecetaClienteComponent,
-    PedidoClienteComponent
+    PedidoClienteComponent,
+    RegistroUsuarioComponent
   ],
   imports: [
     FormsModule,
