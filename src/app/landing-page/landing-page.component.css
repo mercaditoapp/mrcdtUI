@@ -24,3 +24,42 @@ hr {
         top: 18px;
         left: 10px;
       }
+
+.landing-page-video {
+    display: block;
+    width: 100%;
+}
+
+.top-container {
+    display: block;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 0;
+    margin: auto;
+    height: 205px;
+    overflow: hidden
+}
+
+.top-container--txt h2 {
+    color: #ffffff;
+    font-size: 48px;
+    margin: 0 auto;
+    max-width: 520px;
+}
+
+.get-cooking-btn {
+    font-size: 16px;
+    line-height: 54.72px;
+    height: 54.72px;
+    padding: 0 40px;
+    margin-top: 35px;
+}
+.btn--orange, .btn-orange {
+    background-color: #ff7600;
+    border-color: #ff7600;
+}
