@@ -26,6 +26,7 @@ import { RecetasClienteComponent } from './recetas-cliente/recetas-cliente.compo
 import { RecetaClienteComponent } from './receta-cliente/receta-cliente.component';
 import { PedidoClienteComponent } from './pedido-cliente/pedido-cliente.component';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
+import { CatalogosComponent } from './catalogos/catalogos.component';
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
   { path: 'recetas-cliente', component: RecetasClienteComponent },
   { path: 'receta-cliente', component: RecetaClienteComponent },
   { path: 'pedido-cliente', component: PedidoClienteComponent },
-  { path: 'registro-usuario', component: RegistroUsuarioComponent }
+  { path: 'registro-usuario', component: RegistroUsuarioComponent },
+  { path: 'catalogos', component: CatalogosComponent }
 ];
 
 
@@ -52,7 +54,8 @@ const appRoutes: Routes = [
     RecetasClienteComponent,
     RecetaClienteComponent,
     PedidoClienteComponent,
-    RegistroUsuarioComponent
+    RegistroUsuarioComponent,
+    CatalogosComponent
   ],
   imports: [
     FormsModule,
