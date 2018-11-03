@@ -1,5 +1,4 @@
- <!-- Amor necesito que lo arregles porfavor-->
- <div class="row">
+<div class="row">
   <div class="col-md-12">
     <div class="row" style="padding-top: 5px; margin: 30px;padding: 20px">
       <div class="col-md-3" style=" padding-top: 30px;">
@@ -7,8 +6,7 @@
       </div>
       <div class="col-md-6">
         <div class="tittle text-center">
-          <h2>¡Categorias!</h2>
-          <p>¡Nuevas Undades y Equivalencias!</p>
+          <h2>¡Agregar Undades y Equivalencias!</h2>
         </div>
       </div>
       <div class="col-md-3" style=" padding-top: 30px;">
@@ -24,63 +22,75 @@
                 <h3> Unidades </h3>
                 <div class="form-row">
                   <div class="form-group col-md-7">
-                    <label for="inputEmail4">Agrega la unidad o objeto requerido</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nuevo">
+                    <label for="inputEmail4">Agrega la unidad</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nueva">
                   </div>
                   <div class="form-group col-md-5">
-                      <button type="submit" class="btn btn-outline-success" 
-                      style="margin-top: 30px" (click)='agregarequivalencia()'>Agregar Unidad</button>
+                    <button #Unidad type="submit" class="btn btn-outline-success" style="margin-top: 30px" 
+                    (click)='agregarUnidad(Unidad)'>Agregar Unidad</button>
                   </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-7">
+                      <label for="inputEmail4">Agregar abreviación de la unidad </label>
+                      <input type="email" class="form-control" id="inputEmail4" placeholder="Nuevo">
+                    </div>
+                    <div class="form-group col-md-5">
+                      <button type="submit" class="btn btn-outline-success" style="margin-top: 30px"
+                       (click)='newAbbreviation()'>Agregar abreviación</button>
+                    </div>
+                  </div>
                 <h3>Equivalencias</h3>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="inputPassword4" style="float:right">¿Que?</label>
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="Valor">
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="inputPassword4">= ¿Que?</label>
-                      <input type="email" class="form-control" id="inputEmail4" placeholder="Valor">
-                      <input type="text" class="form-control" id="inputPassword4" placeholder="Nombre">
-                    </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4" style="float:right">¿Que?</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Valor">
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputPassword4">= ¿Que?</label>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Valor">
+                    <input type="text" class="form-control" id="inputPassword4" placeholder="Nombre">
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-outline-success" style="float:right" 
-                (click)='agregarequivalencia()'>Agregar Equivalencias</button>
+                <button type="submit" class="btn btn-outline-success" style="float:right"
+                 (click)='newEquivalence()'>Agregar Equivalencias</button>
               </form>
             </div>
-            
           </div>
         </div>
       </div>
     </div>
-    <!-- Amor necesito que lo arregles para que funcione -->
-    <div class="container marketing">
-      <div class="row justify-content-md-center" style="padding-top: 30px">
-        <div class="col-md-12">
-          <div class="row justify-content-md-center">
-            <hr>
-            <button class="btn btn-outline-success" (click)='getequivalencia()'>Cargar Equivalencia</button>
-            <hr>
-            <div class="row">
-              <div class="col-md-2" *ngFor="let producto of productos; let i = index">
-                <div class="card">
-                  <img class="card-img-top" src="{{ producto.imagen }}" alt="{{ producto.imagen }}">
-                  <div class="card-body">
-                    <h6 class="card-title">{{ producto.nombre }}</h6>
-                    <p class="card-text">$ {{ producto.precio }} MXN</p>
-                    <a href="#" class="btn btn-primary">Agregar</a>
+    <div class="row">
+      <div class="container marketing">
+        <div class="row justify-content-md-center" style="padding-top: 30px">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <button class="btn btn-outline-success" (click)='getequivalencia()'>Cargar Equivalencia</button>
+
+
+                </div>
+                <div class="col-md-6">
+                  <button class="btn btn-outline-success" (click)='showUnits()'>Cargar Unidad</button>
+                  <div class="card border-light mb-3" style="max-width: 18rem;">
+                    <div *ngIf="showunidades">
+                      <h3>Unidades:</h3>
+                      <ul>
+                        <li *ngFor="let unidad of unidades">
+                          {{ unidad.nombre }} </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <hr>
-            <button class="btn btn-outline-success" (click)='getUnidad()'>Cargar Unidad</button>
-            <hr>
           </div>
         </div>
       </div>
     </div>
-   
+
+
   </div>
 </div>

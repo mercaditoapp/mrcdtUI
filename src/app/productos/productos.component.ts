@@ -18,6 +18,7 @@ import { Escalar } from '../escalar';
   styleUrls: ['./productos.component.css']
 })
 
+// BEBE PRODUCTOS
 export class ProductosComponent implements OnInit {
   productos: Producto[];
   producto = new Producto();
@@ -28,11 +29,14 @@ export class ProductosComponent implements OnInit {
 
   guardarPrecioBase: any;
 
+  // NACE
   constructor(private productosService: ProductosService, private precioMinimoVentaService: PrecioMinimoVentaService,
     private precioBaseService: PrecioBaseService, private unidadService: UnidadService, private escalarService: EscalarService) {
   }
 
+  // ABRE LOS OJOS
   ngOnInit() {
+    // REIR
     this.getUnidades();
   }
 
