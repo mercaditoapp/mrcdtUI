@@ -16,13 +16,13 @@ export class UnidadService {
       .map((res: Response) => <Unidad[]>res.json());
   }
 
-  public getOne(idx: String): Observable<Unidad> {
+  public getUnidad(idx: String): Observable<Unidad> {
     return this._http
       .get(AppSettings.API_ENDPOINT + '/oauth/unidad/findOne/' + idx)
       .map((res: Response) => <Unidad>res.json());
   }
 
-  public insert(unidad: Unidad) {
+  public insertUnidad(unidad: Unidad) {
     let head = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: head });
 
@@ -33,3 +33,4 @@ export class UnidadService {
 
 
 }
+
