@@ -16,7 +16,7 @@ export class UnidadService {
       .map((res: Response) => <Unidad[]>res.json());
   }
 
-  public getUnidad(idx: String): Observable<Unidad> {
+  public getOne(idx: String): Observable<Unidad> {
     return this._http
       .get(AppSettings.API_ENDPOINT + '/oauth/unidad/findOne/' + idx)
       .map((res: Response) => <Unidad>res.json());
