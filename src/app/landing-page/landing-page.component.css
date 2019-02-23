@@ -65,9 +65,8 @@ hr {
 }
 
 .btn_comienzo {
-  background-color: #b92147;
-   border-color:  #b92147 ; 
-    
+    background-color: #b92147;
+    border-color:  #b92147 ; 
     color: white; 
     padding-top: 10px;
     margin-top: 20px;
@@ -75,9 +74,5 @@ hr {
     padding-left: 15px;
     text-align: center;
     padding-bottom: 10px;
-    
-
-    /**background-color: transparent; **/
-    
      
 }
