@@ -6,21 +6,22 @@
         <img src="{{receta.imagen}}" alt="{{receta.nombreUrl}}" class="img-thumbnail receta-img">
       </div>
       <div class="col-md-9">
-        <h3>{{receta.nombre}}         <button class="btn btn-danger btn-sm" (click)='eliminarReceta(receta)'>Eliminar</button></h3>
+        <h3>{{receta.nombre}} <button class="btn btn-danger btn-sm" (click)='eliminarReceta(receta)'>Eliminar</button>
+        </h3>
         <hr>
-        <span>{{receta.descripcion}}</span>        
+        <span>{{receta.descripcion}}</span>
       </div>
     </div>
     <hr>
     <div class="row">
       <div class="col-3">
         <div class="list-group" id="list-tab" role="tablist">
-          <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab"
-            aria-controls="home">Ingredientes</a>
-          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab"
-            aria-controls="profile">Procedimientos</a>
-          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab"
-            aria-controls="messages">Pasos</a>
+          <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+            href="#list-home" role="tab" aria-controls="home">Ingredientes</a>
+          <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+            href="#list-profile" role="tab" aria-controls="profile">Procedimientos</a>
+          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+            href="#list-messages" role="tab" aria-controls="messages">Pasos</a>
         </div>
       </div>
       <div class="col-9">
@@ -32,8 +33,8 @@
               <div class="col-md-6">
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="productoBusqueda.nombre" (ngModelChange)="buscarProducto($event)"
-                      placeholder="Buscar Producto">
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="productoBusqueda.nombre"
+                      (ngModelChange)="buscarProducto($event)" placeholder="Buscar Producto">
                   </div>
                   <div class="form-group col-md-12 buscador-ingredientes-table">
                     <table class="table table-receta" id="table-todos-ingredientes">
@@ -58,42 +59,101 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="ingredienteProcedimiento.producto.nombre" disabled="true"
-                      placeholder="Producto Seleccionado">
-                  </div>
 
-                  <div class="form-group col-md-6">
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="ingredienteProcedimiento.cantidad" placeholder="Cantidad">
-                  </div>
+                <!--    =======================  UNIDADES - EQUIVALENCIAS=================================                -->
+                <div class="form-group col-md-12">
+                  <input type="text" class="form-control form-control-sm"
+                    [(ngModel)]="ingredienteProcedimiento.producto.nombre" disabled="true"
+                    placeholder="Producto Seleccionado">
+                </div>
 
-                  <div class="form-group col-md-6">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="pills-unidades-tab" data-toggle="pill" href="#pills-unidades"
+                      role="tab" aria-controls="pills-unidades" aria-selected="true">Unidades</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="pills-equivalencias-tab" data-toggle="pill" href="#pills-equivalencias"
+                      role="tab" aria-controls="pills-equivalencias" aria-selected="false">Equivalencias</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-unidades" role="tabpanel"
+                    aria-labelledby="pills-unidades-tab">
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <input type="text" class="form-control form-control-sm"
+                          [(ngModel)]="ingredienteProcedimiento.cantidad" placeholder="Cantidad">
+                      </div>
 
-                    <select class="form-control form-control-sm" id="unidadSelect" [(ngModel)]="ingredienteProcedimiento.unidad.idx">
-                      <option *ngFor="let unidad of unidades" [value]="unidad.idx">{{unidad.nombre}}/{{unidad.abreviatura}}</option>
-                    </select>
+                      <div class="form-group col-md-6">
+
+                        <select class="form-control form-control-sm" id="unidadSelect"
+                          [(ngModel)]="ingredienteProcedimiento.unidad.idx">
+                          <option *ngFor="let unidad of unidades" [value]="unidad.idx">
+                            {{unidad.nombre}}/{{unidad.abreviatura}}</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-9">
+                        <select class="form-control form-control-sm" id="procedimientoIngredienteSelect"
+                          [(ngModel)]="ingredienteProcedimiento.procedimiento.idx">
+                          <option *ngFor="let procedimiento of receta.procedimientos" [value]="procedimiento.idx">
+                            {{procedimiento.nombre}}</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3">
+                        <button class="btn btn-info btn-sm" (click)='agregarIngredienteProcedimiento()'>Agregar</button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group col-md-9">
-                    <select class="form-control form-control-sm" id="procedimientoIngredienteSelect" [(ngModel)]="ingredienteProcedimiento.procedimiento.idx">
-                      <option *ngFor="let procedimiento of receta.procedimientos" [value]="procedimiento.idx">{{procedimiento.nombre}}</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-3">
-                    <button class="btn btn-info btn-sm" (click)='agregarIngredienteProcedimiento()'>Agregar</button>
+                  <div class="tab-pane fade" id="pills-equivalencias" role="tabpanel"
+                    aria-labelledby="pills-equivalencias-tab">
+                    <div class="form-row">
+                      <div class="form-group col-md-9">
+
+                        <select class="form-control form-control-sm" id="equivalenciasSelect"
+                          [(ngModel)]="productoEquivalencia.equivalencia.idx">
+                          <option *ngFor="let equivalencia of equivalencias" [value]="equivalencia.idx">
+                            {{ equivalencia.escalarA.valor }} {{ equivalencia.escalarA.unidad.nombre }}
+                            ({{ equivalencia.escalarA.unidad.abreviatura }}) = {{ equivalencia.escalarB.valor }}
+                            {{ equivalencia.escalarB.unidad.nombre }} ({{ equivalencia.escalarB.unidad.abreviatura }})
+                          </option>
+                        </select>
+
+                      </div>
+                      <div class="form-group col-md-3">
+                        <button class="btn btn-info btn-sm" (click)='asignarEquivalencia()'>Asignar</button>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-8">
+                        <ul class="list-group">
+                          <li class="list-group-item" *ngFor="let productoEquivalencia of ingredienteProcedimiento.producto.productoEquivalencia; let i = index"
+                            style="font-size: 12px;">
+                            {{ productoEquivalencia.equivalencia.escalarA.valor }} {{ productoEquivalencia.equivalencia.escalarA.unidad.nombre }}
+                            ({{ productoEquivalencia.equivalencia.escalarA.unidad.abreviatura }}) = {{ productoEquivalencia.equivalencia.escalarB.valor }}
+                            {{ productoEquivalencia.equivalencia.escalarB.unidad.nombre }} ({{ productoEquivalencia.equivalencia.escalarB.unidad.abreviatura }})
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                <!--    ==================================================================================                -->
 
               </div>
             </div>
             <hr>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item active">
-                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Todos</a>
+                <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                  aria-selected="true">Todos</a>
               </li>
               <li class="nav-item" *ngFor="let procedimiento of receta.procedimientos; let i = index">
-                <a class="nav-link" id="{{procedimiento.nombreTab}}-tab-ingredientes" data-toggle="tab" href="#{{procedimiento.nombreTab}}-ingredientes"
-                  role="tab" [attr.aria-controls]="procedimiento.nombreTab" aria-selected="false">{{procedimiento.nombre}}</a>
+                <a class="nav-link" id="{{procedimiento.nombreTab}}-tab-ingredientes" data-toggle="tab"
+                  href="#{{procedimiento.nombreTab}}-ingredientes" role="tab"
+                  [attr.aria-controls]="procedimiento.nombreTab" aria-selected="false">{{procedimiento.nombre}}</a>
               </li>
             </ul>
             <div class="tab-content ingredientes-tab" id="myTabContent">
@@ -103,20 +163,22 @@
                     <tr>
                       <th scope="col">Cantidad</th>
                       <th scope="col">Unidad</th>
-                      <th scope="col">Producto</th>                      
+                      <th scope="col">Producto</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let ingredienteReceta of receta.ingredientesReceta; let i_ingredienteReceta = index">
                       <td>{{ingredienteReceta.cantidad}}</td>
-                      <td>{{ingredienteReceta.unidad.abreviatura}}</td>
+                      <td>{{ingredienteReceta.unidad.nombre}} ({{ingredienteReceta.unidad.abreviatura}})</td>
                       <td>{{ingredienteReceta.producto.nombre}}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <div class="tab-pane fade" *ngFor="let procedimiento of receta.procedimientos; let i_procedimiento = index" id="{{procedimiento.nombreTab}}-ingredientes"
-                role="tabpanel" [attr.aria-labelledby]="procedimiento.nombreTab + '-tab-ingredientes'">
+              <div class="tab-pane fade"
+                *ngFor="let procedimiento of receta.procedimientos; let i_procedimiento = index"
+                id="{{procedimiento.nombreTab}}-ingredientes" role="tabpanel"
+                [attr.aria-labelledby]="procedimiento.nombreTab + '-tab-ingredientes'">
                 <table class="table table-receta">
                   <thead>
                     <tr>
@@ -127,11 +189,13 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let ingredienteProcedimiento of procedimiento.ingredientesProcedimiento; let i_ingredienteProcedimiento = index">
+                    <tr
+                      *ngFor="let ingredienteProcedimiento of procedimiento.ingredientesProcedimiento; let i_ingredienteProcedimiento = index">
                       <td>{{ingredienteProcedimiento.cantidad}}</td>
-                      <td>{{ingredienteProcedimiento.unidad.abreviatura}}</td>
+                      <td>{{ingredienteProcedimiento.unidad.nombre}} ({{ingredienteProcedimiento.unidad.abreviatura}})</td>
                       <td>{{ingredienteProcedimiento.producto.nombre}}</td>
-                      <td><button class="btn btn-danger btn-sm" (click)='eliminarIngredienteProcedimiento(ingredienteProcedimiento)'>X</button></td>
+                      <td><button class="btn btn-danger btn-sm"
+                          (click)='eliminarIngredienteProcedimiento(ingredienteProcedimiento)'>X</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -144,13 +208,16 @@
             <hr>
             <div class="form-row">
               <div class="form-group col-md-2">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoProcedimiento.indice" placeholder="Índice">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoProcedimiento.indice"
+                  placeholder="Índice">
               </div>
               <div class="form-group col-md-4">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoProcedimiento.nombre" placeholder="Nombre">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoProcedimiento.nombre"
+                  placeholder="Nombre">
               </div>
               <div class="form-group col-md-4">
-                <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoProcedimiento.nombreTab" placeholder="Nombre Tab">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoProcedimiento.nombreTab"
+                  placeholder="Nombre Tab">
               </div>
               <div class="form-group col-md-2">
                 <button class="btn btn-success btn-sm" (click)='agregarProcedimiento()'>Agregar</button>
@@ -164,17 +231,21 @@
               <div class="col-4">
                 <div class="form-row">
                   <div class="form-group col-md-3">
-                    <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoPaso.indice" placeholder="Indice">
+                    <input type="text" class="form-control form-control-sm" [(ngModel)]="nuevoPaso.indice"
+                      placeholder="Indice">
                   </div>
                   <div class="form-group col-md-9">
-                    <select class="form-control form-control-sm" id="procedimientoSelect" [(ngModel)]="nuevoPaso.procedimiento.idx">
-                      <option *ngFor="let procedimiento of receta.procedimientos" [value]="procedimiento.idx">{{procedimiento.nombre}}</option>
+                    <select class="form-control form-control-sm" id="procedimientoSelect"
+                      [(ngModel)]="nuevoPaso.procedimiento.idx">
+                      <option *ngFor="let procedimiento of receta.procedimientos" [value]="procedimiento.idx">
+                        {{procedimiento.nombre}}</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <textarea class="form-control form-control-sm" rows="5" [(ngModel)]="nuevoPaso.descripcion" placeholder="Descripcion"></textarea>
+                    <textarea class="form-control form-control-sm" rows="5" [(ngModel)]="nuevoPaso.descripcion"
+                      placeholder="Descripcion"></textarea>
                   </div>
                 </div>
                 <div class="form-row">
@@ -189,16 +260,20 @@
 
                     <div class="list-group" id="pasos-procedimientos-list-tab" role="tablist">
 
-                      <a class="list-group-item list-group-item-action" *ngFor="let procedimiento of receta.procedimientos" id="{{procedimiento.nombreTab}}-list-pasos-procedimientos"
-                        data-toggle="list" href="#list-pasos-procedimientos-{{procedimiento.nombreTab}}" role="tab" [attr.aria-controls]="procedimiento.nombreTab">{{procedimiento.nombre}}</a>
+                      <a class="list-group-item list-group-item-action"
+                        *ngFor="let procedimiento of receta.procedimientos"
+                        id="{{procedimiento.nombreTab}}-list-pasos-procedimientos" data-toggle="list"
+                        href="#list-pasos-procedimientos-{{procedimiento.nombreTab}}" role="tab"
+                        [attr.aria-controls]="procedimiento.nombreTab">{{procedimiento.nombre}}</a>
                     </div>
 
                   </div>
                   <div class="col-8">
 
                     <div class="tab-content" id="pasos-procedimientos-nav-tabContent">
-                      <div class="tab-pane fade" *ngFor="let procedimiento of receta.procedimientos" id="list-pasos-procedimientos-{{procedimiento.nombreTab}}"
-                        role="tabpanel" [attr.aria-labelledby]="procedimiento.nombreTab + '-list-pasos-procedimientos'">
+                      <div class="tab-pane fade" *ngFor="let procedimiento of receta.procedimientos"
+                        id="list-pasos-procedimientos-{{procedimiento.nombreTab}}" role="tabpanel"
+                        [attr.aria-labelledby]="procedimiento.nombreTab + '-list-pasos-procedimientos'">
                         <div *ngFor="let paso of procedimiento.pasos; let i_paso = index">
                           <span class="badge badge-pill badge-info">{{i_paso + 1}}</span> {{paso.descripcion}}
                         </div>

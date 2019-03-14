@@ -1,89 +1,96 @@
 <div class="row">
-  <div class="col-md-12">
-    <div class="row" style="padding-top: 5px; margin: 30px;padding: 20px">
-      <div class="col-md-3" style=" padding-top: 30px;">
-        <hr size="40">
-      </div>
-      <div class="col-md-6">
-        <div class="tittle text-center">
-          <h2>¡Agregar Undades y Equivalencias!</h2>
+  <div class="col-md-10 offset-md-1">
+    <hr>
+    <h3>Catálogos</h3>
+    <hr>
+
+    <div class="row">
+      <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link active" id="v-pills-unidades-tab" data-toggle="pill" href="#v-pills-unidades" role="tab" aria-controls="v-pills-unidades"
+            aria-selected="true">Unidades</a>
+          <a class="nav-link" id="v-pills-escalares-tab" data-toggle="pill" href="#v-pills-escalares" role="tab" aria-controls="v-pills-escalares"
+            aria-selected="false">Escalares</a>
+          <a class="nav-link" id="v-pills-equivalencias-tab" data-toggle="pill" href="#v-pills-equivalencias" role="tab" aria-controls="v-pills-equivalencias"
+            aria-selected="false">Equivalencias</a>
         </div>
       </div>
-      <div class="col-md-3" style=" padding-top: 30px;">
-        <hr size="40">
-      </div>
-    </div>
-    <div class="container marketing">
-      <div class="row justify-content-md-center" style="padding-top: 30px">
-        <div class="col-md-12">
-          <div class="row justify-content-md-center">
-            <div class="col-md-6">
-              <form>
-                <h3> Unidades </h3>
-                <div class="form-row"> 
-                  <div class="form-group col-md-7">
-                    <label for="inputEmail4">Agrega la unidad</label>
-
-                    <input [(ngModel)]="unidadInput.nombre" name="nombre" type="text" class="form-control" placeholder="Nueva Unidad">
-                    <input [(ngModel)]="unidadInput.abreviatura" name="abreviatura" type="text" class="form-control" placeholder="Nueva Abreviatura">
-                  </div>
-                  <div class="form-group col-md-5">
-                    <button type="submit" class="btn btn-outline-success" style="margin-top: 30px" (click)='agregarUnidad()'>Agregar
-                      Unidad</button>
-                  </div>
-                </div>
-              
-                <h3>Equivalencias</h3>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="inputPassword4" style="float:right">¿Que?</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Valor">
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="inputPassword4">= ¿Que?</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Valor">
-                    <input type="text" class="form-control" id="inputPassword4" placeholder="Nombre">
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-outline-success" style="float:right" (click)='newEquivalence()'>Agregar
-                  Equivalencias</button>
-              </form>
+      <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent">
+          <div class="tab-pane fade show active" id="v-pills-unidades" role="tabpanel" aria-labelledby="v-pills-unidades-tab">
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="unidad.nombre" placeholder="Nombre">
+              </div>
+              <div class="form-group col-md-4">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="unidad.abreviatura" placeholder="Abreviatura">
+              </div>
+              <div class="form-group col-md-4">
+                <button class="btn btn-success btn-sm" (click)='insertUnidad()'>Agregar Unidad</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let unidad of unidades; let i = index" style="font-size: 12px;">
+                    {{ unidad.nombre }} ({{ unidad.abreviatura }})
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="container marketing">
-        <div class="row justify-content-md-center" style="padding-top: 30px">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-6">
-                  <button class="btn btn-outline-success" (click)='getequivalencia()'>Cargar Equivalencia</button>
-
-
-                </div>
-                <div class="col-md-6">
-                  <button class="btn btn-outline-success" (click)='showUnits()'>Cargar Unidad</button>
-                  <div class="card border-light mb-3" style="max-width: 18rem;">
-                    <div *ngIf="showunidades">
-                      <h3>Unidades:</h3>
-                      <ul>
-                        <li *ngFor="let unidad of unidades">
-                          {{ unidad.nombre }} </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+          <div class="tab-pane fade" id="v-pills-escalares" role="tabpanel" aria-labelledby="v-pills-escalares-tab">
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="escalar.valor" placeholder="Valor">
+              </div>
+              <div class="form-group col-md-4">
+                <select class="form-control form-control-sm" id="unidadEscalarSelect" [(ngModel)]="escalar.unidad.idx">
+                  <option *ngFor="let unidad of unidades" [value]="unidad.idx">{{unidad.nombre}}/{{unidad.abreviatura}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <button class="btn btn-success btn-sm" (click)='insertEscalar()'>Agregar Escalar</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let escalar of escalares; let i = index" style="font-size: 12px;">
+                    {{ escalar.valor }} {{ escalar.unidad.nombre }} ({{ escalar.unidad.abreviatura }})
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="v-pills-equivalencias" role="tabpanel" aria-labelledby="v-pills-equivalencias-tab">
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <select class="form-control form-control-sm" id="escalarASelect" [(ngModel)]="equivalencia.escalarA.idx">
+                  <option *ngFor="let escalar of escalares" [value]="escalar.idx">{{ escalar.valor }} {{ escalar.unidad.nombre }} ({{ escalar.unidad.abreviatura }})</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <select class="form-control form-control-sm" id="escalarBSelect" [(ngModel)]="equivalencia.escalarB.idx">
+                  <option *ngFor="let escalar of escalares" [value]="escalar.idx">{{ escalar.valor }} {{ escalar.unidad.nombre }} ({{ escalar.unidad.abreviatura }})</option>
+                </select>
+              </div>
+              <div class="form-group col-md-4">
+                <button class="btn btn-success btn-sm" (click)='insertEquivalencia()'>Agregar Equivalencia</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4">
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let equivalencia of equivalencias; let i = index" style="font-size: 12px;">
+                    {{ equivalencia.escalarA.valor }} {{ equivalencia.escalarA.unidad.nombre }} ({{ equivalencia.escalarA.unidad.abreviatura }}) = {{ equivalencia.escalarB.valor }} {{ equivalencia.escalarB.unidad.nombre }} ({{ equivalencia.escalarB.unidad.abreviatura }})
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
 </div>

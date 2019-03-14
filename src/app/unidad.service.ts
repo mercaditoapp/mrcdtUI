@@ -22,6 +22,12 @@ export class UnidadService {
       .map((res: Response) => <Unidad>res.json());
   }
 
+  public getByProductoIdx(idx: String): Observable<Unidad[]> {
+    return this._http
+      .get(AppSettings.API_ENDPOINT + '/oauth/unidad/findByProductoIdx/' + idx)
+      .map((res: Response) => <Unidad[]>res.json());
+  }
+
   public insertUnidad(unidad: Unidad) {
     let head = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: head });

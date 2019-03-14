@@ -7,6 +7,8 @@ import { ProcedimientoService } from '../procedimiento.service';
 import { IngredienteProcedimientoService } from '../ingrediente-procedimiento.service';
 import { PasoService } from '../paso.service';
 import { UnidadService } from '../unidad.service';
+import { EquivalenciaService } from '../equivalencia.service';
+import { ProductoEquivalenciaService } from '../producto-equivalencia.service';
 
 import { Receta } from '../receta';
 import { Producto } from '../producto';
@@ -15,6 +17,9 @@ import { Paso } from '../paso';
 import { Unidad } from '../unidad';
 import { IngredienteProcedimiento } from '../ingrediente-procedimiento';
 import { IngredienteReceta } from '../ingrediente-receta';
+import { Equivalencia } from '../equivalencia';
+import { ProductoEquivalencia } from '../producto-equivalencia';
+import { Almacen } from '../almacen';
 
 @Component({
   selector: 'app-manager-receta',
@@ -30,11 +35,18 @@ export class ManagerRecetaComponent implements OnInit {
   ingredienteProcedimiento = new IngredienteProcedimiento();
   unidades: Unidad[];
 
+  equivalencia = new Equivalencia();
+  equivalencias: Equivalencia[];
+
+  productoEquivalencia = new ProductoEquivalencia();
+
   constructor(
     private recetaService: RecetaService,
     private productosService: ProductosService,
     private procedimientoService: ProcedimientoService,
     private ingredienteProcedimientoService: IngredienteProcedimientoService,
+    private equivalenciaService: EquivalenciaService,
+    private productoEquivalenciaService: ProductoEquivalenciaService,
     private pasoService: PasoService,
     private unidadService: UnidadService,
     private route: ActivatedRoute,
@@ -48,23 +60,30 @@ export class ManagerRecetaComponent implements OnInit {
     console.log(this.route.snapshot.paramMap.get('nombreUrl'));
 
     this.getReceta();
-    this.getUnidades();
+    this.getEquivalencias();
   }
 
   getReceta() {
     this.recetaService.getReceta(this.route.snapshot.paramMap.get('nombreUrl'))
       .subscribe(
-      receta => {
-        console.log(receta);
-        this.receta = receta;
-      }
+        receta => {
+          console.log(receta);
+          this.receta = receta;
+        }
       );
   }
 
   getUnidades() {
     this.unidadService.getAll()
       .subscribe(
-      unidades => this.unidades = unidades
+        unidades => this.unidades = unidades
+      );
+  }
+
+  getUnidadesByProductoIdx(idx: String) {
+    this.unidadService.getByProductoIdx(idx)
+      .subscribe(
+        unidades => this.unidades = unidades
       );
   }
 
@@ -72,11 +91,11 @@ export class ManagerRecetaComponent implements OnInit {
   insertProcedimiento(procedimiento: Procedimiento) {
     this.procedimientoService.insert(procedimiento)
       .subscribe(
-      procedimiento => {
-        console.dir(procedimiento);
-        this.nuevoProcedimiento = new Procedimiento();
-        this.getReceta();
-      }
+        procedimiento => {
+          console.dir(procedimiento);
+          this.nuevoProcedimiento = new Procedimiento();
+          this.getReceta();
+        }
       );
   }
 
@@ -92,11 +111,11 @@ export class ManagerRecetaComponent implements OnInit {
   insertPaso(paso: Paso) {
     this.pasoService.insert(paso)
       .subscribe(
-      paso => {
-        console.dir(paso);
-        this.nuevoPaso = new Paso();
-        this.getReceta();
-      }
+        paso => {
+          console.dir(paso);
+          this.nuevoPaso = new Paso();
+          this.getReceta();
+        }
       );
   }
 
@@ -110,9 +129,9 @@ export class ManagerRecetaComponent implements OnInit {
     if (this.productoBusqueda.nombre.length > 0) {
       this.productosService.findByNombre(this.productoBusqueda)
         .subscribe(
-        productosBusqueda => {
-          this.productosBusqueda = productosBusqueda;
-        }
+          productosBusqueda => {
+            this.productosBusqueda = productosBusqueda;
+          }
         );
     } else {
       this.productoBusqueda = new Producto();
@@ -125,6 +144,8 @@ export class ManagerRecetaComponent implements OnInit {
     console.dir($event);
 
     this.ingredienteProcedimiento.producto = $event;
+    this.getUnidadesByProductoIdx(this.ingredienteProcedimiento.producto.idx);
+
   }
 
   eliminarIngredienteProcedimiento($event: any) {
@@ -134,10 +155,10 @@ export class ManagerRecetaComponent implements OnInit {
 
     this.ingredienteProcedimientoService.deleteByIdx(ingredienteProcedimiento.idx)
       .subscribe(
-      ingredienteProcedimiento => {
-        console.dir(ingredienteProcedimiento);
-        this.actualizarIngredientesReceta();
-      }
+        ingredienteProcedimiento => {
+          console.dir(ingredienteProcedimiento);
+          this.actualizarIngredientesReceta();
+        }
       );
   }
 
@@ -149,10 +170,10 @@ export class ManagerRecetaComponent implements OnInit {
 
     this.recetaService.deleteByIdx(receta.idx)
       .subscribe(
-      receta => {
-        console.dir(receta);
-        this.router.navigate(['/recetas']);
-      }
+        receta => {
+          console.dir(receta);
+          this.router.navigate(['/recetas']);
+        }
       );
   }
 
@@ -164,10 +185,10 @@ export class ManagerRecetaComponent implements OnInit {
   actualizarIngredientesReceta() {
     this.recetaService.actualizarIngredientesReceta(this.receta.idx)
       .subscribe(
-      ingredienteReceta => {
-        console.dir(ingredienteReceta);
-        this.getReceta();
-      }
+        ingredienteReceta => {
+          console.dir(ingredienteReceta);
+          this.getReceta();
+        }
       );
   }
 
@@ -175,12 +196,55 @@ export class ManagerRecetaComponent implements OnInit {
   insertIngredienteProcedimiento(ingredienteProcedimiento: IngredienteProcedimiento) {
     this.ingredienteProcedimientoService.insert(ingredienteProcedimiento)
       .subscribe(
-      ingredienteProcedimiento => {
-        console.dir(ingredienteProcedimiento);
-        this.ingredienteProcedimiento = new IngredienteProcedimiento();
-        this.actualizarIngredientesReceta();
-      }
+        ingredienteProcedimiento => {
+          console.dir(ingredienteProcedimiento);
+          this.ingredienteProcedimiento = new IngredienteProcedimiento();
+          this.actualizarIngredientesReceta();
+        }
       );
+  }
+
+  getEquivalencias() {
+    this.equivalenciaService.getAll()
+      .subscribe(
+        equivalencias => {
+          this.equivalencias = equivalencias
+          console.dir(equivalencias);
+        }
+      );
+  }
+
+  insertProductoEquivalencia(productoEquivalencia: ProductoEquivalencia) {
+    this.productoEquivalenciaService.insert(productoEquivalencia)
+      .subscribe(
+        productoEquivalencia => {
+          console.dir(productoEquivalencia);
+          this.refrescarProducto();
+        }
+      );
+  }
+
+  refrescarProducto() {
+    this.productosService.findByNombre(this.ingredienteProcedimiento.producto)
+      .subscribe(
+        producto => {
+          this.ingredienteProcedimiento.producto = producto[0];
+          this.productoEquivalencia = new ProductoEquivalencia();
+          this.getUnidadesByProductoIdx(this.ingredienteProcedimiento.producto.idx);
+        }
+      );
+  }
+
+  asignarEquivalencia() {
+
+    var almacen: Almacen = new Almacen();
+    almacen.idx = 1;
+
+    this.productoEquivalencia.producto = this.ingredienteProcedimiento.producto;
+    this.productoEquivalencia.almacen = almacen;
+
+    this.insertProductoEquivalencia(this.productoEquivalencia);
+
   }
 
 }

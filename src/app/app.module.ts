@@ -18,10 +18,15 @@ import { PrecioMinimoVentaService } from './precio-minimo-venta.service';
 import { PrecioBaseService } from './precio-base.service';
 import { UnidadService } from './unidad.service';
 import { EscalarService } from './escalar.service';
+
 import { RecetaService } from './receta.service';
 import { ProcedimientoService } from './procedimiento.service';
 import { IngredienteProcedimientoService } from './ingrediente-procedimiento.service';
 import { PasoService } from './paso.service';
+
+import { EquivalenciaService } from './equivalencia.service';
+import { ProductoEquivalenciaService } from './producto-equivalencia.service';
+
 import { RecetasClienteComponent } from './recetas-cliente/recetas-cliente.component';
 import { RecetaClienteComponent } from './receta-cliente/receta-cliente.component';
 import { PedidoClienteComponent } from './pedido-cliente/pedido-cliente.component';
@@ -76,6 +81,8 @@ const appRoutes: Routes = [
     ProcedimientoService,
     IngredienteProcedimientoService,
     EscalarService,
+    EquivalenciaService,
+    ProductoEquivalenciaService,
     PasoService,
     { provide: BrowserXhr, useClass: NgProgressBrowserXhr }
   ],

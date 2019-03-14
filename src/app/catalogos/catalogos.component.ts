@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { Unidad } from '../unidad';
 import { Escalar } from '../escalar';
+import { Equivalencia } from '../equivalencia';
 
 import { UnidadService } from '../unidad.service';
+import { EscalarService } from '../escalar.service';
+import { EquivalenciaService } from '../equivalencia.service';
+
 
 @Component({
   selector: 'app-catalogos',
@@ -13,66 +17,83 @@ import { UnidadService } from '../unidad.service';
 
 export class CatalogosComponent implements OnInit {
 
-  unidades: Array<Unidad> = JSON.parse('[{"idx":1,"nombre":"GRAMOS","abreviatura":"GR."},{"idx":2,"nombre":"FRASCO","abreviatura":"FRASCO"},{"idx":3,"nombre":"BOLSA","abreviatura":"BOLSA"},{"idx":4,"nombre":"TAZA","abreviatura":"TAZA"},{"idx":5,"nombre":"CUCHARADA","abreviatura":"CUCHARADA"},{"idx":6,"nombre":"REBANADA","abreviatura":"REBANADA"},{"idx":7,"nombre":"PAQUETE","abreviatura":"PAQUETE"},{"idx":8,"nombre":"PIEZA","abreviatura":"PZ."},{"idx":9,"nombre":"REBANADA","abreviatura":"REBANADA"}]');
-  unidad = new Array<Unidad>();
-  equivalencas: "Equivalencia"[];
-  Equivalencia = new Escalar();
+  unidad = new Unidad();
+  unidades: Unidad[];
 
-  unidadInput = new Unidad();
+  escalar = new Escalar();
+  escalares: Escalar[];
 
+  equivalencia = new Equivalencia();
+  equivalencias: Equivalencia[];
 
-  showunidades: boolean;
-
-  constructor(private unidadService: UnidadService) {
-
-    this.showunidades = false;
-    this.unidadService.getAll()
-      .subscribe(
-        unidades => {
-          this.unidad = unidades;
-          ;
-        }
-      );
-  }
-
+  constructor(private unidadService: UnidadService, private escalarService: EscalarService, private equivalenciaService: EquivalenciaService) { }
 
   ngOnInit() {
-    this.getUnidad();
+    this.getUnidades();
+    this.getEscalares();
+    this.getEquivalencias();
   }
-
-  showUnits() {
-    this.showunidades = !this.showunidades;
-  }
-
-  getUnidad() {
-    this.unidadService.getAll()
-      .subscribe(
-        unidades => {
-        this.unidades = unidades
-        console.dir(unidades);
-        }
-      );
-  }
-
 
   insertUnidad() {
-    this.unidadService.insertUnidad(this.unidadInput)
+    this.unidadService.insertUnidad(this.unidad)
       .subscribe(
         unidad => {
           console.dir(unidad);
-          this.unidad = new Array<Unidad>();
-          this.getUnidad();
+          this.unidad = new Unidad();
+          this.getUnidades();
         }
       );
   }
 
-  agregarUnidad() {
-
-    console.log(this.unidadInput);
-    this.insertUnidad();
+  insertEscalar() {
+    this.escalarService.insert(this.escalar)
+      .subscribe(
+        escalar => {
+          console.dir(escalar);
+          this.escalar = new Escalar();
+          this.getEscalares();
+        }
+      );
   }
 
+  insertEquivalencia() {
+    this.equivalenciaService.insert(this.equivalencia)
+      .subscribe(
+        equivalencia => {
+          console.dir(equivalencia);
+          this.equivalencia = new Equivalencia();
+          this.getEquivalencias();
+        }
+      );
+  }
 
+  getUnidades() {
+    this.unidadService.getAll()
+      .subscribe(
+        unidades => {
+          this.unidades = unidades
+          console.dir(unidades);
+        }
+      );
+  }
 
+  getEscalares() {
+    this.escalarService.getAll()
+      .subscribe(
+        escalares => {
+          this.escalares = escalares
+          console.dir(escalares);
+        }
+      );
+  }
 
+  getEquivalencias() {
+    this.equivalenciaService.getAll()
+      .subscribe(
+        equivalencias => {
+          this.equivalencias = equivalencias
+          console.dir(equivalencias);
+        }
+      );
+  }
 }

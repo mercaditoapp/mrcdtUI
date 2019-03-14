@@ -22,3 +22,13 @@
     overflow: auto;
     height: 300px;
 }
+
+.nav-link.active{
+    background-color: lightseagreen;
+    border-color: lightseagreen;
+    color: white !important;
+}
+
+.nav-pills .nav-link{
+    color: #495057;
+}
