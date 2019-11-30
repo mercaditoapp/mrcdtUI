@@ -203,5 +203,41 @@
         </div>
       </div>
     </div>
+
+    <div class="row" style="padding-top: 5px; margin: 30px;padding: 20px">
+      <div class="col-md-3" style=" padding-top: 30px;">
+        <hr size="40">
+      </div>
+      <div class="col-md-6">
+        <div class="tittle text-center">
+          <h2>¡Recetas!</h2>
+          <p>¡Navega en nunestras recetas!</p>
+        </div>
+      </div>
+      <div class="col-md-3" style=" padding-top: 30px;">
+        <hr size="40">
+      </div>
+    </div>
+
+    <div class="container marketing">
+      <div class="row justify-content-md-center" style="padding-top: 30px">
+        <div class="row">
+          <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-3" *ngFor="let receta of recetas; let i = index">
+                  <div class="column">
+                    <img class="card-img-top"  src="{{ receta.imagen }}" alt="{{ receta.imagen }}" style="width:100%; height: 100%;">
+                    <div class="card-body">
+                      <h5 class="card-title" style="text-align: center"> {{receta.nombre}}</h5>
+                      <p class="card-text">{{receta.descripcion}}</p>
+                      <a href="/manager/receta/{{receta.nombreUrl}}" class="btn btn-outline-info"  style="float:right" role="button">Ver más</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
